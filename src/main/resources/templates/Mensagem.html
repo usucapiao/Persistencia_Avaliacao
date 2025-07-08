@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- Fragmento para exibir mensagens de sucesso/informação -->
+<div class="alert alert-success alert-dismissible fade show rounded-lg shadow-md mx-auto my-4 p-4 text-center"
+     role="alert" th:if="${!#strings.isEmpty(message)}" th:fragment="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <span th:text="${message}" class="text-lg font-semibold text-green-800"></span>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<!-- Modal de confirmação de exclusão -->
+<div class="modal fade" id="confirmacaoExclusaoModal" tabindex="-1"
+     role="dialog" aria-labelledby="confirmacaoExclusaoModalLabel" aria-hidden="true"
+     th:fragment="modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content rounded-lg shadow-xl">
+
+            <div class="modal-header bg-danger text-white rounded-t-lg p-4">
+                <h5 class="modal-title text-lg font-bold" id="confirmacaoExclusaoModalLabel">Confirmar Exclusão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+
+            <div class="modal-body p-6 text-gray-700">
+                Você tem certeza que deseja excluir o jogo <span></span>?
+            </div>
+
+            <div class="modal-footer p-4 bg-light rounded-b-lg d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+                <!-- Formulário para envio do DELETE -->
+
+                <form method="post" action="" data-url-base="/jogos/" class="d-inline">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

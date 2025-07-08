@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- ✅ Fragmento para exibir mensagens de erro de validação -->
+<div th:fragment="alert">
+    <div class="alert alert-danger alert-dismissible fade show rounded-lg shadow-md mx-auto my-4 p-4 text-center"
+         role="alert"
+         th:if="${#fields != null and #fields.hasAnyErrors()}">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div th:each="detailedError : ${#fields.detailedErrors()}" class="text-red-800 font-medium">
+            <span th:text="${detailedError.message}"></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

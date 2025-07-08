@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head layout:fragment="cabecalho">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Coleção de Jogos</title>
+
+    <!-- CSS com th:href -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <!-- Ícones externos -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Cabeçalho (fragmento Thymeleaf) -->
+<header th:replace="Cabecalho :: header"></header>
+
+<!-- Conteúdo dinâmico via layout fragment -->
+<section layout:fragment="conteudo">
+    <p>Conteúdo principal</p>
+</section>
+
+<!-- Scripts JS no final do body -->
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/acoes.js}"></script>
+
+</body>
+</html>

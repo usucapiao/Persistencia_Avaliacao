@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Cadastro de Jogo</title>
+    <meta charset="UTF-8" />
+
+    <!-- CSS com th:href -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <!-- Scripts também com th:src -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div class="container mt-4">
+        <!-- Mensagem de sucesso/informação -->
+        <div th:replace="Mensagem :: alert"></div>
+
+        <div class="card card-form max-width-800 mx-auto">
+            <div class="card-header bg-primary text-white p-4 rounded-t-lg">
+                <h2 class="text-xl font-bold text-center">Cadastro de Jogo</h2>
+            </div>
+            <div class="card-body p-6">
+                <!-- Formulário com contexto de validação -->
+                <form th:object="${jogo}" method="POST" th:action="@{/jogos}">
+                    <!-- Mensagens de erro (agora dentro do form) -->
+                    <div th:replace="MensagemErro :: alert"></div>
+
+                    <!-- ID oculto para edição -->
+                    <input type="hidden" th:field="*{id}" />
+
+                    <!-- Campo: Título -->
+                    <div class="form-group row mb-4">
+                        <label for="titulo" class="col-sm-3 col-form-label text-gray-700 font-medium">Título do Jogo</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="titulo" th:field="*{titulo}" required
+                                   class="form-control rounded-md"
+                                   th:classappend="${#fields.hasErrors('titulo')} ? 'is-invalid' : ''"
+                                   placeholder="Título do Jogo" />
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo: Gênero -->
+                    <div class="form-group row mb-4">
+                        <label for="genero" class="col-sm-3 col-form-label text-gray-700 font-medium">Gênero</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="genero" th:field="*{genero}" required
+                                   class="form-control rounded-md"
+                                   th:classappend="${#fields.hasErrors('genero')} ? 'is-invalid' : ''"
+                                   placeholder="Gênero" />
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo: Ano de Lançamento -->
+                    <div class="form-group row mb-4">
+                        <label for="anoLancamento" class="col-sm-3 col-form-label text-gray-700 font-medium">Ano de Lançamento</label>
+                        <div class="col-sm-9">
+                            <input type="number" id="anoLancamento" th:field="*{anoLancamento}" required min="1970" max="2100"
+                                   class="form-control rounded-md"
+                                   th:classappend="${#fields.hasErrors('anoLancamento')} ? 'is-invalid' : ''"
+                                   placeholder="Ano de Lançamento" />
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('anoLancamento')}" th:errors="*{anoLancamento}"></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo: Plataforma -->
+                    <div class="form-group row mb-4">
+                        <label for="plataforma" class="col-sm-3 col-form-label text-gray-700 font-medium">Plataforma</label>
+                        <div class="col-sm-9">
+                            <select id="plataforma" th:field="*{plataforma}" required
+                                    class="form-control rounded-md"
+                                    th:classappend="${#fields.hasErrors('plataforma')} ? 'is-invalid' : ''">
+                                <option value="">Selecione uma plataforma</option>
+                                <option th:each="plataforma : ${todasPlataforma}"
+                                        th:value="${plataforma}"
+                                        th:text="${plataforma.descricao}"></option>
+                            </select>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('plataforma')}" th:errors="*{plataforma}"></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo: Status -->
+                    <div class="form-group row mb-4">
+                        <label for="status" class="col-sm-3 col-form-label text-gray-700 font-medium">Status</label>
+                        <div class="col-sm-9">
+                            <select id="status" th:field="*{status}" required
+                                    class="form-control rounded-md"
+                                    th:classappend="${#fields.hasErrors('status')} ? 'is-invalid' : ''">
+                                <option value="">Selecione um status</option>
+                                <option th:each="status : ${todosStatus}"
+                                        th:value="${status}"
+                                        th:text="${status.descricao}"></option>
+                            </select>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+                        </div>
+                    </div>
+
+                    <!-- Botão de envio -->
+                    <div class="form-group row mt-6">
+                        <div class="col-sm-9 offset-sm-3">
+                            <button type="submit" class="btn btn-primary rounded-md px-6 py-2 shadow-md">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
